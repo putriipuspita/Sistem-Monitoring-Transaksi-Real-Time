@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Transfer - Simple</title>
+    <!-- Font Awesome untuk icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS kita -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-university"></i>
+        </div>
+        <h1>Sistem Transfer Bank</h1>
+        <p class="subtitle">Transfer uang dengan notifikasi real-time via MQTT</p>
+    </header>
+    
+    <div class="container">
+        <!-- KARTU KIRI: FORM TRANSFER -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-exchange-alt"></i>
+                <h2>Transfer Uang</h2>
+            </div>
+            
+            <form id="transferForm">
+                <div class="form-group">
+                    <label for="fromAccount">
+                        <i class="fas fa-user"></i>
+                        Akun Pengirim
+                    </label>
+                    <input type="text" id="fromAccount" placeholder="Contoh: 123456" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="toAccount">
+                        <i class="fas fa-user-friends"></i>
+                        Akun Penerima
+                    </label>
+                    <input type="text" id="toAccount" placeholder="Contoh: 654321" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">
+                        <i class="fas fa-money-bill-wave"></i>
+                        Jumlah (Rp)
+                    </label>
+                    <input type="number" id="amount" placeholder="Contoh: 50000" min="1000" required>
+                </div>
+                
+                <button type="submit" id="submitBtn" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Kirim Transfer</span>
+                </button>
+            </form>
+            
+            <!-- PANEL STATUS -->
+            <div class="status-panel">
+                <h3><i class="fas fa-info-circle"></i> Status</h3>
+                <div class="status-item">
+                    <span class="label">Server Backend:</span>
+                    <span id="backendStatus" class="value">Mengecek...</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Koneksi MQTT:</span>
+                    <span id="mqttStatus" class="value">Menghubungkan...</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Total Transfer:</span>
+                    <span id="totalTransfers" class="value">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Transaksi Terakhir:</span>
+                    <span id="lastTransaction">-</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- KARTU KANAN: LOG NOTIFIKASI -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-bell"></i>
+                <h2>Log Notifikasi</h2>
+            </div>
+            
+            <div class="log-container">
+                <div id="notificationLog"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- TEMPAT NOTIFIKASI REAL-TIME -->
+    <div id="notificationContainer" class="notification-container"></div>
+    
+    <!-- FOOTER -->
+    <footer>
+        <p><i class="fas fa-code"></i> Sistem Transfer Bank</p>
+    </footer>
+    
+    <!-- LIBRARY MQTT -->
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    
+    <!-- SCRIPT KITA -->
+    <script src="app.js"></script>
+</body>
+</html>
